@@ -20,10 +20,11 @@ public final class CardNumberValidator implements Checkable {
         }
 
 
+        @Override
         public final boolean isInputValid() throws InputMismatchException {
-                if ("".equals(cardNumber)) throw new InputMismatchException("Input ERROR!");
+                if ("".equals(cardNumber)) throw new InputMismatchException("Input ERROR: empty string!");
                 if (cardNumber.length() != LENGTH) return false;
-                if (isAllNumbers(this.cardNumber)) {
+                if (isAllNumbers(cardNumber)) {
                         return true;
                 } else {
                         return false;
@@ -41,7 +42,10 @@ public final class CardNumberValidator implements Checkable {
                 return true;
         }
 
+        @Override
         public final boolean isNumberValid() {
+                // Guard clause
+                if (!isInputValid()) return false;
                 int sum = 0;
                 boolean alternate = false;
                 for (int i = cardNumber.length() - 1; i >= 0; i--) {
@@ -54,6 +58,23 @@ public final class CardNumberValidator implements Checkable {
                         }
                         sum += n;
                         alternate = !alternate;
+                }
+                return (sum % 10 == 0);
+        }
+
+        public final boolean isNumberValidCustom() {
+                // Guard clause
+                if (!isInputValid()) return false;
+                int sum = 0, curr, next, doubled;
+                char[] buffer = cardNumber.toCharArray();
+                for (int i = 0; i < LENGTH; i += 2) {
+                        curr = Character.getNumericValue(buffer[i]);
+                        next = Character.getNumericValue(buffer[i + 1]);
+                        doubled = 2 * curr;
+                        if (doubled > 9) {
+                                doubled = (doubled % 10) + 1;
+                        }
+                        sum += doubled + next;
                 }
                 return (sum % 10 == 0);
         }

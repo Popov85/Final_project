@@ -1,6 +1,7 @@
 package com.goit.g2.final_project;
 
 import java.security.InvalidAlgorithmParameterException;
+import java.util.Calendar;
 import java.util.InputMismatchException;
 
 /**
@@ -13,6 +14,10 @@ public final class Card {
         private boolean isOccupied;
 
         private Object cardHolder;
+
+        private Calendar validDate;
+
+        private String cvvCode;
 
         public Card(String sequence) throws InputMismatchException, InvalidAlgorithmParameterException {
                 this.number = new CardNumber(sequence);

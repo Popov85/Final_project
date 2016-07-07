@@ -8,17 +8,15 @@ import java.util.InputMismatchException;
  */
 public final class CardNumber {
 
-        private static final int LENGTH = 16;
-
         private String cardNumber;
 
         public CardNumber(String sequence) throws InputMismatchException, InvalidAlgorithmParameterException {
                 CardNumberValidator validator = new CardNumberValidator(sequence);
-                if (validator.isNumberValid()) {
+                if (validator.isNumberValidCustom()) {
                         this.cardNumber = sequence;
                 }
                 else {
-                        throw new InvalidAlgorithmParameterException();
+                        throw new InvalidAlgorithmParameterException("Input ERROR: wrong number!");
                 }
         }
 

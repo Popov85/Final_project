@@ -3,7 +3,7 @@ package com.goit.g2.final_project;
 import java.util.InputMismatchException;
 
 /**
- * Interface {@code Checkable}  for validating a credit card number in two steps:
+ * Interface {@code Validator}  for validating a credit card number in two steps:
  * 1. General input errors;
  * 2. Luhn algorithm;
  * @author G2 team at GoJavaOnline#3 including:
@@ -12,7 +12,7 @@ import java.util.InputMismatchException;
  * @author Roman Kalyga
  * @author Andrii Popov
  */
-public interface Checkable {
+public interface Validator {
 
         /**
          * Checks for general mistakes in input:

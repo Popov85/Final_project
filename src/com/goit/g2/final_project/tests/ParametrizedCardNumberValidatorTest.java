@@ -42,8 +42,9 @@ public class ParametrizedCardNumberValidatorTest {
                                 {"  6011219609778337  ", true, true},        // valid number starting/ending with spaces
                                 {"7011219609778337", true, false},           // valid number, invalid Luhn
                                 {"4587 x578 ****  784d", false, false},      // invalid number
-                                {"9965", false, false},                      // invalid number
-                                {"7896 7896 8965 7895 565565", false ,false} // invalid quantity
+                                {"9965", false, false},                      // too short number
+                                {"7896 7896 8965 7895 555", true ,false},    // quantity [12-19]
+                                {"7896 7896 8965 7895 5555", false, false}   // too long number
                 });
         }
 

@@ -1,4 +1,4 @@
-package com.goit.g2.final_project;
+package com.goit.g2.final_project.usage;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.util.InputMismatchException;

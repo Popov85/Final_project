@@ -1,4 +1,4 @@
-package com.goit.g2.final_project;
+package com.goit.g2.final_project.application;
 
 /**
  * Created by Андрей on 05.07.2016.
@@ -6,13 +6,13 @@ package com.goit.g2.final_project;
 public class App {
         public static void main(String[] args) {
 
-                CardNumberValidator validator = new CardNumberValidator("4485 9821 1491 2228");
-                System.out.println(validator.isNumberValidCustom());
+                AbstractValidator validator = new CardNumberValidatorApache("ergreygtrytytry");
+                System.out.println(validator.isNumberValid());
                 //Integer.parseInt("Z");
 
                 /*Card card;
                 try {
-                        card = new Card("");
+                        card = new Card();
                         System.out.println(card.getNumber().getCardNumber());
                 } catch (InputMismatchException e) {
                         System.out.println(e.getMessage());

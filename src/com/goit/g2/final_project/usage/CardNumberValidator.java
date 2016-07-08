@@ -1,4 +1,6 @@
-package com.goit.g2.final_project;
+package com.goit.g2.final_project.usage;
+
+import com.goit.g2.final_project.application.Validator;
 
 import java.util.InputMismatchException;
 /**
@@ -10,7 +12,11 @@ public final class CardNumberValidator implements Validator {
         private static final int MAX_LENGTH = 19;
 
 
-        private String cardNumber;
+        private final String cardNumber;
+
+        public CardNumberValidator() {
+                this("");
+        }
 
         public CardNumberValidator(String sequence) {
                 this.cardNumber = prepareSequence(sequence);
@@ -85,6 +91,7 @@ public final class CardNumberValidator implements Validator {
                         doubled = 2 * curr;
                         if (doubled > 9) {
                                 doubled = (doubled % 10) + 1;
+                                //doubled -=9;
                         }
                         sum += doubled + next;
                 }

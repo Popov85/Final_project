@@ -1,5 +1,6 @@
-package com.goit.g2.final_project;
+package com.goit.g2.final_project.application;
 
+import com.goit.g2.final_project.usage.CardNumberValidator;
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
 
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ public class AppPerformanceTest {
                 long startTime = System.nanoTime();
                 System.out.println("We've got:"+testApache(cards)+" valid credit cards via Apache Luhn implementation");
                 System.out.println("Time elapsed: "+(System.nanoTime() - startTime) / 1000000 +" ms");
+
+                startTime = System.nanoTime();
+                testApacheWrapper(cards);
+                System.out.println("Apache wrapper implementation: "+(System.nanoTime() - startTime) / 1000000 +" ms");
 
                 startTime = System.nanoTime();
                 System.out.println("We've got:"+testCustom(cards)+" valid credit cards via Custom Luhn implementation");
@@ -50,7 +55,7 @@ public class AppPerformanceTest {
         private static int testStandard(List<String> cards) {
                 int counter = 0;
                 for (String e: cards) {
-                        Validator validator = new CardNumberValidator(e);
+                        Validator validator = new CardNumberValidatorStandard(e);
                         if (validator.isNumberValid()) counter++;
                 }
                 return counter;
@@ -59,8 +64,8 @@ public class AppPerformanceTest {
         private static int testCustom(List<String> cards) {
                 int counter = 0;
                 for (String e: cards) {
-                        CardNumberValidator validator = new CardNumberValidator(e);
-                        if (validator.isNumberValidCustom()) counter++;
+                        Validator validator = new CardNumberValidatorCustom(e);
+                        if (validator.isNumberValid()) counter++;
                 }
                 return counter;
         }
@@ -70,6 +75,15 @@ public class AppPerformanceTest {
                 for (String e: cards) {
                         LuhnCheckDigit validator = new LuhnCheckDigit();
                         if (validator.isValid(e)) counter++;
+                }
+                return counter;
+        }
+
+        private static int testApacheWrapper(List<String> cards) {
+                int counter = 0;
+                for (String e: cards) {
+                        Validator validator = new CardNumberValidatorApache(e);
+                        if (validator.isNumberValid()) counter++;
                 }
                 return counter;
         }
@@ -89,4 +103,6 @@ public class AppPerformanceTest {
                 }
                 System.out.println(diff+" differences");
         }
+
+
 }

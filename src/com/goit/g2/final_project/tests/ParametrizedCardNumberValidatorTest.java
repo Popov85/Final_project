@@ -1,6 +1,6 @@
 package com.goit.g2.final_project.tests;
 
-import com.goit.g2.final_project.CardNumberValidator;
+import com.goit.g2.final_project.usage.CardNumberValidator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +22,8 @@ import static org.junit.Assert.assertThat;
 public class ParametrizedCardNumberValidatorTest {
 
         private String str;
-        boolean expectedInput;
-        boolean expectedLuhn;
+        private boolean expectedInput;
+        private boolean expectedLuhn;
 
         CardNumberValidator cardNumber;
 
@@ -39,9 +39,9 @@ public class ParametrizedCardNumberValidatorTest {
                 return Arrays.asList(new Object[][]{
                                 {"4485982114912228", true, true},            // valid number
                                 {"4485 9821 1491 2228",true, true},          // valid number with spaces
-                                {"  6011219609778337  ", true, true},        // valid number starting/ending with spaces
+                                {"  6011219609778337  ", true, true},        // valid number with spaces
                                 {"7011219609778337", true, false},           // valid number, invalid Luhn
-                                {"4587 x578 ****  784d", false, false},      // invalid number
+                                {"4587 x578 ****  784d", false, false},      // not all numbers
                                 {"9965", false, false},                      // too short number
                                 {"7896 7896 8965 7895 555", true ,false},    // quantity [12-19]
                                 {"7896 7896 8965 7895 5555", false, false}   // too long number
@@ -73,5 +73,4 @@ public class ParametrizedCardNumberValidatorTest {
         public void isNumberValidCustom() throws Exception {
                 assertThat(cardNumber.isNumberValidCustom(), is(expectedLuhn));
         }
-
 }

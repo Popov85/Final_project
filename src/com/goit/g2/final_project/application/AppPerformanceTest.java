@@ -37,8 +37,6 @@ public class AppPerformanceTest {
                 System.out.println("We've got:"+testStandard(cards)+" valid credit cards via Standard Luhn implementation");
                 System.out.println("Time elapsed: "+(System.nanoTime() - startTime) / 1000000 +" ms");
 
-
-
                 testDifference(cards);
         }
 
@@ -103,6 +101,4 @@ public class AppPerformanceTest {
                 }
                 System.out.println(diff+" differences");
         }
-
-
 }

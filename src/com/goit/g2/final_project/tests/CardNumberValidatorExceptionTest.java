@@ -18,7 +18,7 @@ public class CardNumberValidatorExceptionTest {
 
         @Before
         public void setUp() throws Exception {
-                cardNumber = new CardNumberValidator(""); // Empty string was entered
+                cardNumber = new CardNumberValidator("     "); // Empty string was entered
         }
 
         @After

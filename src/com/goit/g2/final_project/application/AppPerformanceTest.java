@@ -1,6 +1,5 @@
 package com.goit.g2.final_project.application;
 
-import com.goit.g2.final_project.usage.CardNumberValidator;
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ public class AppPerformanceTest {
                 System.out.println("We've got:"+testStandard(cards)+" valid credit cards via Standard Luhn implementation");
                 System.out.println("Time elapsed: "+(System.nanoTime() - startTime) / 1000000 +" ms");
 
-                testDifference(cards);
+                System.out.println(testDifference(cards)+" differences");
         }
 
         private static void initializer(List cards) {
@@ -86,19 +85,21 @@ public class AppPerformanceTest {
                 return counter;
         }
 
-        private static void testDifference(List<String> cards) {
-                boolean resultStandard, resultCustom;
+        private static int testDifference(List<String> cards) {
+                boolean resSt, resCu, resAp;
                 int diff = 0;
                 for (String e: cards) {
-                        CardNumberValidator validator = new CardNumberValidator(e);
-                        resultStandard = validator.isNumberValid();
-                        resultCustom = validator.isNumberValidCustom();
-                        if (resultStandard!=resultCustom) {
-                                System.out.println("Card is: "+e+", Standard gave: "+resultStandard+", Custom gave: "+resultCustom);
+                        Validator validator = new CardNumberValidatorStandard(e);
+                        resSt = validator.isNumberValid();
+                        validator = new CardNumberValidatorCustom(e);
+                        resCu = validator.isNumberValid();
+                        validator = new CardNumberValidatorApache(e);
+                        resAp = validator.isNumberValid();
+                        if (resSt!=resCu | resSt!=resAp | resCu!=resAp) {
+                                System.out.println("Card is: "+e+", Standard gave: "+resSt+", Custom gave: "+resCu+ ", Apache gave: "+resAp);
                                 diff++;
                         }
-
                 }
-                System.out.println(diff+" differences");
+                return diff;
         }
 }

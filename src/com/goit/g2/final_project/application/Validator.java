@@ -16,9 +16,9 @@ public interface Validator {
 
         /**
          * Checks for general mistakes in input:
-         * 1. Letters instead of/mixed with numbers;
-         * 2. Quantity of letters more or less 16;
-         * 3. Ignores spaces between number groups if present.
+         * 1. Ignores spaces between number groups if present.
+         * 2. Quantity of letters within the range [12- 19];
+         * 3. Letters instead of/mixed with numbers;
          * @return true if what a user entered is a plausible credit card number, false otherwise
          * @throws InputMismatchException if nothing (empty string) was entered by a user
          */

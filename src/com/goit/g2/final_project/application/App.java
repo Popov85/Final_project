@@ -6,6 +6,7 @@ package com.goit.g2.final_project.application;
 public class App {
         public static void main(String[] args) {
 
+                //List list =
                 Validator validator = new CardNumberValidatorApache("ergreygtrytytry");
                 System.out.println(validator.isNumberValid());
                 //Integer.parseInt("Z");

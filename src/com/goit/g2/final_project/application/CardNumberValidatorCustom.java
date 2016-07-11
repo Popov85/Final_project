@@ -36,12 +36,11 @@ public final class CardNumberValidatorCustom extends AbstractValidator {
                 if (!isInputValid()) return false;
 
                 int sum = 0, curr, next, doubled;
-                char[] buffer = cardNumber.toCharArray();
-                int lastIndex = buffer.length-1;
+                int lastIndex = cardNumber.length()-1;
                 for (int i = lastIndex - 1; i >= 0; i -= 2) {
-                        curr = getInt(buffer[i]);
+                        curr = getInt(cardNumber.charAt(i));
                         if (i != 0) {
-                                next = getInt(buffer[i - 1]);
+                                next = getInt(cardNumber.charAt(i-1));
                         } else {
                                 next = 0;
                         }
@@ -51,7 +50,7 @@ public final class CardNumberValidatorCustom extends AbstractValidator {
                         }
                         sum += doubled + next;
                 }
-                int last = getInt(buffer[lastIndex]);
+                int last = getInt(cardNumber.charAt(lastIndex));
                 sum +=last;
                 return (sum % 10 == 0);
         }

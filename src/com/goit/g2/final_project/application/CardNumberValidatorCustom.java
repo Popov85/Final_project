@@ -1,7 +1,8 @@
 package com.goit.g2.final_project.application;
 
 /**
- * Created by Андрей on 08.07.2016.
+ * Class provides a custom realization of Luhn validation algorithm
+ * @author Andrii Popov
  */
 public final class CardNumberValidatorCustom extends AbstractValidator {
 
@@ -30,6 +31,8 @@ public final class CardNumberValidatorCustom extends AbstractValidator {
                 super(sequence);
         }
 
+
+        /** Custom implementation of Luhn algorithm */
         @Override
         public boolean isNumberValid() {
                 // Guard clause

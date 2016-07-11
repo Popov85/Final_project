@@ -14,11 +14,6 @@ import java.util.Collection;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by Андрей on 06.07.2016.
- */
-
-
 @RunWith (value = Parameterized.class)
 public class ParametrizedCardNumberValidatorTest {
 

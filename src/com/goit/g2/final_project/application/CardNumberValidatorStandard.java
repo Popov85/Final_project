@@ -1,7 +1,9 @@
 package com.goit.g2.final_project.application;
 
 /**
- * Created by Андрей on 08.07.2016.
+ * A realization of Luhn algorithm taken from the Internet
+ * the slowest implementation
+ * @author unknown
  */
 public final class CardNumberValidatorStandard extends AbstractValidator {
 

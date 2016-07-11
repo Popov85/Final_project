@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-/**
- * Created by Андрей on 07.07.2016.
- */
 public class AppPerformanceTest {
 
         private static long LOWER_RANGE = 100000000000L; //assign lower range value

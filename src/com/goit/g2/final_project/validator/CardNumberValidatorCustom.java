@@ -1,4 +1,4 @@
-package com.goit.g2.final_project.efewfef;
+package com.goit.g2.final_project.validator;
 
 /**
  * Class provides a custom realization of Luhn validation algorithm

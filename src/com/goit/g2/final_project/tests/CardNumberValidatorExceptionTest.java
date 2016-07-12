@@ -1,7 +1,7 @@
 package com.goit.g2.final_project.tests;
 
-import com.goit.g2.final_project.efewfef.CardNumberValidatorCustom;
-import com.goit.g2.final_project.efewfef.Validator;
+import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
+import com.goit.g2.final_project.validator.Validator;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 

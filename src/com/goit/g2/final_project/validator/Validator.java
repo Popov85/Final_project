@@ -1,9 +1,9 @@
-package com.goit.g2.final_project.efewfef;
+package com.goit.g2.final_project.validator;
 
 import java.util.InputMismatchException;
 
 /**
- * Interface {@code efewfef}  for validating a credit card number in two steps:
+ * Interface {@code validator}  for validating a credit card number in two steps:
  * 1. General input errors;
  * 2. Luhn algorithm;
  * @author G2 team at GoJavaOnline#3 including:

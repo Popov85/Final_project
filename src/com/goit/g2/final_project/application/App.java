@@ -1,7 +1,7 @@
 package com.goit.g2.final_project.application;
 
-import com.goit.g2.final_project.efewfef.CardNumberValidatorCustom;
-import com.goit.g2.final_project.efewfef.Validator;
+import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
+import com.goit.g2.final_project.validator.Validator;
 
 import java.util.Scanner;
 

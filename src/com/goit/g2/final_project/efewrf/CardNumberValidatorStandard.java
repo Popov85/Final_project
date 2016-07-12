@@ -1,4 +1,4 @@
-package com.goit.g2.final_project.validator;
+package com.goit.g2.final_project.efewrf;
 
 /**
  * A realization of Luhn algorithm taken from the Internet

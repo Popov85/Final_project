@@ -1,7 +1,7 @@
 package com.goit.g2.final_project.application;
 
-import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
-import com.goit.g2.final_project.validator.Validator;
+import com.goit.g2.final_project.efewrf.CardNumberValidatorCustom;
+import com.goit.g2.final_project.efewrf.Validator;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.util.InputMismatchException;

@@ -1,9 +1,9 @@
-package com.goit.g2.final_project.efewrf;
+package com.goit.g2.final_project.validators;
 
 import java.util.InputMismatchException;
 
 /**
- * This class provides a skeletal implementation of the efewrf interface for
+ * This class provides a skeletal implementation of the validators interface for
  * validating bank cards only;
  * It fully realizes isInputValid() method to facilitate the implementation of
  * concrete classes for Luhn validation;

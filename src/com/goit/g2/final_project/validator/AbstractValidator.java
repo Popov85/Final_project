@@ -39,15 +39,17 @@ public abstract class AbstractValidator implements Validator {
                 return sequence.replace(" ", "");
         }
 
-    /**
-     * This implementation gives a filer for validation user's input
-     * and is the first step of validation a credit card number
-     * @return true if the sequence is plausible, false if not
-     * @throws InputMismatchException if an empty string was entered
-     */
-    @Override
-        public boolean isInputValid() throws InputMismatchException {
-                if ("".equals(cardNumber)) throw new InputMismatchException("Input ERROR: empty string!");
+        /**
+         * Checks for general mistakes in input:
+         * 1. Ignores spaces between number groups if present.
+         * 2. Quantity of letters within the range [12- 19];
+         * 3. Letters instead of/mixed with numbers;
+         * @return true if what a user entered is a plausible credit card number, false otherwise
+         * @throws InputMismatchException if nothing (empty string) was entered by a user
+         */
+
+        protected boolean isInputValid() throws InputMismatchException {
+                if (cardNumber.isEmpty()) throw new InputMismatchException("Input ERROR: empty string!");
                 if (cardNumber.length()< MIN_LENGTH || cardNumber.length()> MAX_LENGTH) return false;
                 if (isAllNumbers(cardNumber)) {
                         return true;

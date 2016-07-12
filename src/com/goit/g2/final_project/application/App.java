@@ -3,6 +3,7 @@ package com.goit.g2.final_project.application;
 import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
 import com.goit.g2.final_project.validator.Validator;
 
+import java.math.BigInteger;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
  */
 public class App {
         public static void main(String[] args) {
+
                 BlockedUsersRepository repo = BlockedUsersRepository.getInstance();
                 Validator validator;
                 Scanner scanner = new Scanner(System.in);
@@ -35,7 +37,7 @@ public class App {
                                 }
                                 // suspicious behaviour
                                 user.increaseAttempts(repo);
-                                System.out.println("Another attempt?: ");
+                                System.out.print("Another attempt?: ");
                                 attempt= scanner.nextLine();
                         } while (!attempt.equals("not"));
 

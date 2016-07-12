@@ -31,6 +31,6 @@ public class CardNumberValidatorExceptionTest {
         public void isInputValid() throws Exception {
                 // Checks for exception
                 exception.expect(InputMismatchException.class);
-                Assert.assertTrue(cardNumber.isInputValid());
+                Assert.assertTrue(cardNumber.isNumberValid());
         }
 }

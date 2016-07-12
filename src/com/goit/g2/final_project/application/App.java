@@ -3,6 +3,7 @@ package com.goit.g2.final_project.application;
 import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
 import com.goit.g2.final_project.validator.Validator;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -20,21 +21,33 @@ public class App {
 
                 User user = new User(email);
 
-                do {
-                        System.out.println("Enter card: ");
-                        card= scanner.nextLine();
-                        validator = new CardNumberValidatorCustom(card);
-                        if (validator.isNumberValid()) {
-                                user.clearAttempts();
-                                break;
-                        }
-                        // suspicious behaviour
-                        user.increaseAttempts(repo);
-                        System.out.println("Another attempt?: ");
-                        attempt= scanner.nextLine();
-                } while (!attempt.equals("not"));
+                try {
+                        do {
+                                if (user.isBlocked()) {
+                                        break;
+                                }
+                                System.out.println("Enter card: ");
+                                card= scanner.nextLine();
+                                validator = new CardNumberValidatorCustom(card);
+                                if (validator.isNumberValid()) {
+                                        user.clearAttempts();
+                                        break;
+                                }
+                                // suspicious behaviour
+                                user.increaseAttempts(repo);
+                                System.out.println("Another attempt?: ");
+                                attempt= scanner.nextLine();
+                        } while (!attempt.equals("not"));
 
-                System.out.println("Has this user been added to blocked: "+repo.hasBlockedUser(user));
+                        if (repo.hasBlockedUser(user)) {
+                                System.out.println("Too many attempts! You were blocked!");
+                        }
+                        else {
+                                System.out.println("Card has been accepted!");
+                        }
+                } catch (InputMismatchException e) {
+                        System.out.println("Invalid input!");
+                }
                 // Do smth. here with further validation
         }
 }

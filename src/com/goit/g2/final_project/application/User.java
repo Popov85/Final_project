@@ -24,7 +24,6 @@ public class User {
                 this.email = email;
         }
 
-
         public String getEmail() {
                 return email;
         }
@@ -58,5 +57,4 @@ public class User {
         public void clearAttempts() {
                 this.failedAttempts = 0;
         }
-
 }

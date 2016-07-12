@@ -1,4 +1,7 @@
-package com.goit.g2.final_project.usage;
+package com.goit.g2.final_project.application;
+
+import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
+import com.goit.g2.final_project.validator.Validator;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.util.InputMismatchException;
@@ -11,8 +14,8 @@ public final class CardNumber {
         private String cardNumber;
 
         public CardNumber(String sequence) throws InputMismatchException, InvalidAlgorithmParameterException {
-                CardNumberValidator validator = new CardNumberValidator(sequence);
-                if (validator.isNumberValidCustom()) {
+                Validator validator = new CardNumberValidatorCustom(sequence);
+                if (validator.isNumberValid()) {
                         this.cardNumber = sequence;
                 }
                 else {

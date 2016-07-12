@@ -1,5 +1,9 @@
-package com.goit.g2.final_project.application;
+package com.goit.g2.final_project.performance;
 
+import com.goit.g2.final_project.validator.CardNumberValidatorApache;
+import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
+import com.goit.g2.final_project.validator.CardNumberValidatorStandard;
+import com.goit.g2.final_project.validator.Validator;
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
 
 import java.util.ArrayList;
@@ -7,10 +11,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class AppPerformanceTest {
+public final class AppPerformanceTest {
 
-        private static long LOWER_RANGE = 100000000000L; //assign lower range value
-        private static long UPPER_RANGE = 9223372036854775807L; //assign upper range value
+        private static final long LOWER_RANGE = 100000000000L; //assign lower range value
+        private static final long UPPER_RANGE = 9223372036854775807L; //assign upper range value
 
         public static void main(String[] args) {
 

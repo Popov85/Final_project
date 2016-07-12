@@ -1,6 +1,7 @@
 package com.goit.g2.final_project.tests;
 
-import com.goit.g2.final_project.usage.CardNumberValidator;
+import com.goit.g2.final_project.validator.CardNumberValidatorCustom;
+import com.goit.g2.final_project.validator.Validator;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
@@ -11,14 +12,14 @@ import java.util.InputMismatchException;
  */
 public class CardNumberValidatorExceptionTest {
 
-        private CardNumberValidator cardNumber;
+        private Validator cardNumber;
 
         @Rule
         public final ExpectedException exception = ExpectedException.none();
 
         @Before
         public void setUp() throws Exception {
-                cardNumber = new CardNumberValidator("     "); // Empty string was entered
+                cardNumber = new CardNumberValidatorCustom("     "); // Empty string was entered
         }
 
         @After

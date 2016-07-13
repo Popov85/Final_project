@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class App {
 
+        /** Singleton. Repository of temporarily blocked users */
         private static final BlockedUsersRepository BLOCKED = BlockedUsersRepository.getInstance();
 
         public static void main(String[] args) {

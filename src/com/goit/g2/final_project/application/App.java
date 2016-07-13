@@ -7,7 +7,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Emulation of real app when users enter wring credit cards and keep getting blocked
+ * Emulation of real app when users enter wrong credit cards and keep getting blocked
+ * after a number of unsuccessful attempts
  * @author Andrii Popov
  */
 public class App {
@@ -16,9 +17,13 @@ public class App {
 
         public static void main(String[] args) {
                 Scanner scanner = new Scanner(System.in);
-                anotherUser(scanner);
-                anotherUser(scanner);
-                displayBlocked();
+                String attempt;
+                do {
+                        anotherUser(scanner);
+                        displayBlocked();
+                        System.out.print("More users?\n");
+                        attempt= scanner.nextLine();
+                } while (!attempt.equals("not"));
         }
 
         private static void anotherUser(Scanner scanner) {

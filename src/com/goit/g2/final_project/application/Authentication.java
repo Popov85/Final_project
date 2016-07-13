@@ -11,9 +11,7 @@ import java.util.Scanner;
 public final class Authentication {
 
         private final User user;
-
         private final BlockedUsersRepository repo;
-
         private final Scanner scanner;
 
         public Authentication(User user, Scanner scanner) {
@@ -42,7 +40,7 @@ public final class Authentication {
                                 break;
                         }
                         // suspicious behaviour
-                        user.increaseAttempts(repo);
+                        user.increaseAttempts();
                         System.out.print("Another attempt?: ");
                         attempt= scanner.nextLine();
                 } while (!attempt.equals("not"));

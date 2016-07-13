@@ -1,15 +1,17 @@
 package com.goit.g2.final_project.application;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
- * Singleton realization
+ * Singleton realization of repository with blocked users (those
+ * who entered a wrong credit card number several times)
  */
 public final class BlockedUsersRepository {
 
         private static BlockedUsersRepository repository = new BlockedUsersRepository();
 
-        private final HashMap<String, User> blockedUsers = new HashMap<String, User>();
+        private final Map<String, User> blockedUsers = new HashMap<String, User>();
 
         private BlockedUsersRepository() {}
 
@@ -34,4 +36,12 @@ public final class BlockedUsersRepository {
                }
         }
 
+        @Override
+        public String toString() {
+                String blockedOnes = "Blocked users: \n";
+                for (String key : blockedUsers.keySet()) {
+                        blockedOnes+=key+"\n";
+                }
+                return blockedOnes;
+        }
 }

@@ -7,48 +7,40 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Created by Андрей on 05.07.2016.
+ * Emulation of real app when users enter wring credit cards and keep getting blocked
+ * @author Andrii Popov
  */
 public class App {
+
+        private static final BlockedUsersRepository BLOCKED = BlockedUsersRepository.getInstance();
+
         public static void main(String[] args) {
-
-                BlockedUsersRepository repo = BlockedUsersRepository.getInstance();
-                Validator validator;
                 Scanner scanner = new Scanner(System.in);
-                String email, card, attempt;
+                anotherUser(scanner);
+                anotherUser(scanner);
+                displayBlocked();
+        }
 
+        private static void anotherUser(Scanner scanner) {
                 System.out.println("Enter email: ");
-                email= scanner.nextLine();
-
-                User user = new User(email);
-
+                String email= scanner.nextLine();
+                User user = null;
                 try {
-                        do {
-                                if (user.isBlocked()) {
-                                        break;
-                                }
-                                System.out.println("Enter card: ");
-                                card= scanner.nextLine();
-                                validator = new CardNumberValidatorCustom(card);
-                                if (validator.isNumberValid()) {
-                                        user.clearAttempts();
-                                        break;
-                                }
-                                // suspicious behaviour
-                                user.increaseAttempts(repo);
-                                System.out.print("Another attempt?: ");
-                                attempt= scanner.nextLine();
-                        } while (!attempt.equals("not"));
-
-                        if (repo.hasBlockedUser(user)) {
-                                System.out.println("Too many attempts! You were blocked!");
-                        }
-                        else {
-                                System.out.println("Card has been accepted!");
-                        }
+                        user = new User(email);
                 } catch (InputMismatchException e) {
-                        System.out.println("Invalid input!");
+                        System.out.println("Invalid e-mail...");
+                        return;
                 }
-                // Do smth. here with further validation
+                Authentication identity = new Authentication(user, scanner);
+                try {
+                        identity.authenticate();
+                } catch (InputMismatchException e) {
+                        System.out.println("Invalid card number...");
+                        return;
+                }
+        }
+
+        private static void displayBlocked() {
+                System.out.println(BLOCKED.toString());
         }
 }

@@ -1,6 +1,7 @@
 package com.goit.g2.final_project.application;
 
 import java.util.Date;
+import java.util.InputMismatchException;
 
 /**
  * Created by Андрей on 12.07.2016.
@@ -14,22 +15,18 @@ public class User {
 
         /** Unique user ID */
         private String email;
-        private String cardNumber;
         // Specifies how many attempts in one sequence was made to enter a correct card number
         private int failedAttempts = 0;
         private boolean isBlocked;
         private Date timeWhenBlocked;
 
-        public User(String email) {
+        public User(String email) throws InputMismatchException {
+                if (email.isEmpty()) throw new InputMismatchException("Invalid email!");
                 this.email = email;
         }
 
         public String getEmail() {
                 return email;
-        }
-
-        public String getCardNumber() {
-                return cardNumber;
         }
 
         public int getFailedAttempts() {

@@ -24,7 +24,7 @@ public class User extends TimerTask {
         // Specifies how many attempts in one sequence was made to enter a correct card number
         private int failedAttempts = 0;
         private boolean isBlocked;
-        private Date timeWhenBlocked;
+        private Timer timer;
 
         public User(String email) throws InputMismatchException {
                 if (email.isEmpty()) throw new InputMismatchException("Invalid email!");
@@ -44,10 +44,6 @@ public class User extends TimerTask {
                 return isBlocked;
         }
 
-        public Date getTimeWhenBlocked() {
-                return timeWhenBlocked;
-        }
-
         /**
          * Increases the counter of unsuccessful attempts for this user
          * After a number of such failed attempts the user becomes blocked
@@ -65,7 +61,7 @@ public class User extends TimerTask {
                 this.isBlocked = true;
                 repo.addBlockedUser(this);
                 TimerTask task = this;
-                Timer timer = new Timer();
+                timer = new Timer();
                 timer.schedule(task, BLOCKING_TIME);
         }
 
@@ -83,5 +79,7 @@ public class User extends TimerTask {
         @Override
         public void run() {
                 unBlockUser();
+                timer.cancel();
+                timer.purge();
         }
 }

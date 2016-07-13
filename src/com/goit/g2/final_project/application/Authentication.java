@@ -52,6 +52,4 @@ public final class Authentication {
                 }
                 // Do smth. here with further validation
         }
-
-
 }

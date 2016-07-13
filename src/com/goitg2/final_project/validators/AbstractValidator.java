@@ -1,4 +1,4 @@
-package com.goit.g2.final_project.validators;
+package com.goitg2.final_project.validators;
 
 import java.util.InputMismatchException;
 

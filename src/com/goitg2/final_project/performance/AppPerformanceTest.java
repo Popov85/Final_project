@@ -1,9 +1,9 @@
-package com.goit.g2.final_project.performance;
+package com.goitg2.final_project.performance;
 
-import com.goit.g2.final_project.validators.CardNumberValidatorApache;
-import com.goit.g2.final_project.validators.CardNumberValidatorCustom;
-import com.goit.g2.final_project.validators.CardNumberValidatorStandard;
-import com.goit.g2.final_project.validators.Validator;
+import com.goitg2.final_project.validators.CardNumberValidatorApache;
+import com.goitg2.final_project.validators.CardNumberValidatorCustom;
+import com.goitg2.final_project.validators.CardNumberValidatorStandard;
+import com.goitg2.final_project.validators.Validator;
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.goit.g2.final_project.validators;
+package com.goitg2.final_project.validators;
 
 /**
  * Interface {@code Validator}  for validating a credit card number in two steps:

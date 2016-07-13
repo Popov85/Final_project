@@ -1,7 +1,4 @@
-package com.goit.g2.final_project.application;
-
-import com.goit.g2.final_project.validators.CardNumberValidatorCustom;
-import com.goit.g2.final_project.validators.Validator;
+package com.goitg2.final_project.application;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

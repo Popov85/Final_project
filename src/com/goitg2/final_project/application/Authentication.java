@@ -1,6 +1,8 @@
-package com.goit.g2.final_project.application;
+package com.goitg2.final_project.application;
 
-import com.goit.g2.final_project.validators.*;
+import com.goitg2.final_project.validators.CardNumberValidatorCustom;
+import com.goitg2.final_project.validators.Validator;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public final class Authentication {
         /**
          * Whether identifies a user or blocks a user with such an e-mail
          * after a number of unsuccessful attempts
-         * @throws InputMismatchException when empty string was entered
+         * @throws InputMismatchException when empty string is entered
          */
         public void authenticate() throws InputMismatchException {
                 String card, attempt;

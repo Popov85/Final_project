@@ -1,12 +1,11 @@
-package com.goit.g2.final_project.application;
+package com.goitg2.final_project.application;
 
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Class {@code Authentification} represents a user by his ID being e-mail
+ * Class {@code User} represents a user by his ID being e-mail
  * @author Popov Andrii
  */
 
@@ -76,6 +75,9 @@ public class User extends TimerTask {
                 this.failedAttempts = 0;
         }
 
+        /**
+         * Unblocks this user after penalty time elapses
+         */
         @Override
         public void run() {
                 unBlockUser();

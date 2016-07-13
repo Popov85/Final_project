@@ -1,4 +1,4 @@
-package com.goit.g2.final_project.validators;
+package com.goitg2.final_project.validators;
 
 import org.apache.commons.validator.routines.checkdigit.LuhnCheckDigit;
 

@@ -34,9 +34,9 @@ public class App {
                         System.out.println("Invalid e-mail...");
                         return;
                 }
-                Authentication identity = new Authentication(user, scanner);
+                PreAuthentication identity = new PreAuthentication(user, scanner);
                 try {
-                        identity.authenticate();
+                        identity.preAuthenticate();
                 } catch (InputMismatchException e) {
                         System.out.println("Invalid card number...");
                         return;

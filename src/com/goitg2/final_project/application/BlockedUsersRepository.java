@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Singleton realization of repository with blocked users (those
+ * Singleton realization of REPOSITORY with blocked users (those
  * who entered a wrong credit card number several times)
+ * @author Andrii Popov
  */
 public final class BlockedUsersRepository {
 
-        private static BlockedUsersRepository repository = new BlockedUsersRepository();
+        private static final BlockedUsersRepository REPOSITORY = new BlockedUsersRepository();
 
         private final Map<String, User> blockedUsers = new HashMap<String, User>();
 
@@ -17,7 +18,7 @@ public final class BlockedUsersRepository {
 
         /* Static 'instance' method */
         public static BlockedUsersRepository getInstance( ) {
-                return repository;
+                return REPOSITORY;
         }
 
         public void addBlockedUser(User user) {

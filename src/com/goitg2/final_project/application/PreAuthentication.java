@@ -7,16 +7,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Class {@code Authentification} for distinguishing a true user from a robot or
- * fraudulent behaviour user
+ * Class {@code PreAuthentication} for distinguishing a true user from a robot or detecting a
+ * fraudulent behaviour user. Some checking before real authentication.
+ * @author Andrii Popov
  */
-public final class Authentication {
+public final class PreAuthentication {
 
         private final User user;
         private final BlockedUsersRepository repo;
         private final Scanner scanner;
 
-        public Authentication(User user, Scanner scanner) {
+        public PreAuthentication(User user, Scanner scanner) {
                 this.user = user;
                 this.scanner = scanner;
                 this.repo = BlockedUsersRepository.getInstance();
@@ -27,7 +28,7 @@ public final class Authentication {
          * after a number of unsuccessful attempts
          * @throws InputMismatchException when empty string is entered
          */
-        public void authenticate() throws InputMismatchException {
+        public void preAuthenticate() throws InputMismatchException {
                 String card, attempt;
                 Validator validator;
                 do {

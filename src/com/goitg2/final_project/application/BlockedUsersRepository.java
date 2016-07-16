@@ -1,20 +1,18 @@
 package com.goitg2.final_project.application;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Singleton realization of REPOSITORY with blocked users (those
  * who entered a wrong credit card number several times)
  * @author Andrii Popov
  */
-public final class BlockedUsersRepository {
+public enum BlockedUsersRepository {
 
-        private static final BlockedUsersRepository REPOSITORY = new BlockedUsersRepository();
+        REPOSITORY;
 
-        private final Map<String, User> blockedUsers = new HashMap<String, User>();
-
-        private BlockedUsersRepository() {}
+        private final ConcurrentMap<String, User> blockedUsers = new ConcurrentHashMap<String, User>();
 
         /* Static 'instance' method */
         public static BlockedUsersRepository getInstance( ) {

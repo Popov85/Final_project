@@ -22,6 +22,7 @@ public class App {
                         System.out.print("More users?\n");
                         attempt= scanner.nextLine();
                 } while (!attempt.equals("not"));
+
         }
 
         private static void anotherUser(Scanner scanner) {

@@ -29,30 +29,32 @@ public final class PreAuthentication {
          * @throws InputMismatchException when empty string is entered
          */
         public void preAuthenticate() throws InputMismatchException {
-                String card, attempt;
+                String card, attempt, message=null;
                 Validator validator;
                 do {
-                        if (repo.hasBlockedUser(user)) {
+                        if (repo.hasForeverBlockedUser(user)) {
+                                message = "You are constantly blocked!\nAddress the system admin to get unblocked!";
+                                break;
+                        }
+                        if (repo.hasTempBlockedUser(user)) {
+                                message = "Too many attempts! You were blocked!";
                                 break;
                         }
                         System.out.println("Enter card: ");
-                        card= scanner.nextLine();
+                        card = scanner.nextLine();
                         validator = new CardNumberValidatorCustom(card);
                         if (validator.isNumberValid()) {
                                 user.clearAttempts();
+                                message = "Card has been accepted!";
                                 break;
                         }
                         // suspicious behaviour
                         user.increaseAttempts();
                         System.out.print("Another attempt?: ");
-                        attempt= scanner.nextLine();
+                        attempt = scanner.nextLine();
                 } while (!attempt.equals("not"));
-                if (repo.hasBlockedUser(user)) {
-                        System.out.println("Too many attempts! You were blocked!");
-                }
-                else {
-                        System.out.println("Card has been accepted!");
-                }
+
+                System.out.println(message);
                 // Do smth. here with further validation
         }
 }

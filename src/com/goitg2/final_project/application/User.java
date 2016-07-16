@@ -20,13 +20,15 @@ public class User extends TimerTask {
 
         /** Unique user ID */
         private final String email;
-        // Specifies how many attempts in one sequence was made to enter a correct card number
+        /**Specifies how many attempts in one sequence was made to enter a correct card number*/
         private int failedAttempts = 0;
         private boolean isBlocked;
+        /** Points out at the fact the user has already been banned during the app's runtime */
+        private boolean wasBlocked;
         private Timer timer;
 
         public User(String email) throws InputMismatchException {
-                if (email.isEmpty()) throw new InputMismatchException("Invalid email!");
+                if (email.isEmpty()||email == null) throw new InputMismatchException("Invalid email!");
                 this.email = email;
                 this.repo = BlockedUsersRepository.getInstance();
         }
@@ -57,16 +59,25 @@ public class User extends TimerTask {
         }
 
         private void blockUser() {
+                if (wasBlocked) {
+                        foreverBlockUser();
+                        return;
+                }
                 this.isBlocked = true;
-                repo.addBlockedUser(this);
+                this.wasBlocked = true; // Says that this user was already banned during the app's runtime at least once
+                repo.addTempBlockedUser(this);
                 TimerTask task = this;
                 timer = new Timer();
                 timer.schedule(task, BLOCKING_TIME);
         }
 
+        private void foreverBlockUser() {
+                repo.addForeverBlockedUser(this);
+        }
+
         private void unBlockUser() {
                 this.isBlocked = false;
-                repo.removeBlockedUser(this);
+                repo.removeTempBlockedUser(this);
                 System.out.println("Success! User with email:" + this.email+" was unblocked!");
                 System.out.println(repo.toString());
         }

@@ -32,7 +32,7 @@ public class Session {
                 }
         }
 
-        private static void anotherUser(String email) {
+        private void anotherUser(String email) {
                 User user = null;
                 if (hasUser(email)) {
                         user = getSessionUser(email);
@@ -54,7 +54,7 @@ public class Session {
                 }
         }
 
-        public static boolean hasUser(String email) {
+        private boolean hasUser(String email) {
                 if (SESSION_USERS.get(email)!=null) {
                         return true;
                 }else {
@@ -62,11 +62,11 @@ public class Session {
                 }
         }
 
-        public static void addSessionUser(User user) {
+        private void addSessionUser(User user) {
                 SESSION_USERS.put(user.getEmail(),user);
         }
 
-        public static User getSessionUser(String email) {
+        private User getSessionUser(String email) {
                 return SESSION_USERS.get(email);
         }
 }

@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class User extends TimerTask {
 
         /** Specifies for how long a user is blocked */
-        private static final long BLOCKING_TIME = 60000; // 60 sec
+        private static final long BLOCKING_TIME = 6000; // 6 sec
         /** Specifies how many times a user must enter wrong card number before being blocked */
         private static final long QUANTITY_OF_ATTEMPTS = 3;
 

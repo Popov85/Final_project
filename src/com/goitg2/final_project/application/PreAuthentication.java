@@ -4,23 +4,25 @@ import com.goitg2.final_project.validators.CardNumberValidatorCustom;
 import com.goitg2.final_project.validators.Validator;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * Class {@code PreAuthentication} for distinguishing a true user from a robot or detecting a
  * fraudulent behaviour user. Some checking before real authentication.
  * @author Andrii Popov
  */
-public final class PreAuthentication {
+public final class PreAuthentication extends Thread {
 
         private final User user;
         private final BlockedUsersRepository repo;
-        private final Scanner scanner;
 
-        public PreAuthentication(User user, Scanner scanner) {
+        public PreAuthentication(User user) {
                 this.user = user;
-                this.scanner = scanner;
                 this.repo = BlockedUsersRepository.getInstance();
+        }
+
+        @Override
+        public void run() {
+                preAuthenticate();
         }
 
         /**
@@ -28,33 +30,33 @@ public final class PreAuthentication {
          * after a number of unsuccessful attempts
          * @throws InputMismatchException when empty string is entered
          */
-        public void preAuthenticate() throws InputMismatchException {
-                String card, attempt, message=null;
+        private void preAuthenticate() throws InputMismatchException {
+                String message=null;
                 Validator validator;
+                int counter = 0;
                 do {
                         if (repo.hasForeverBlockedUser(user)) {
-                                message = "You are constantly blocked!\nAddress the system admin to get unblocked!";
+                                message = user.getEmail()+" got constantly blocked!\nAddress the system admin to get unblocked!";
                                 break;
                         }
                         if (repo.hasTempBlockedUser(user)) {
-                                message = "Too many attempts! You were blocked!";
+                                message = user.getEmail()+" got temporarily blocked! Too many attempts! ";
                                 break;
                         }
-                        System.out.println("Enter card: ");
-                        card = scanner.nextLine();
-                        validator = new CardNumberValidatorCustom(card);
+                        // !!! Keep intentionally entering invalid card number !!!Just in order to model the behaviour
+                        validator = new CardNumberValidatorCustom("4845 2565 2325 2365"); // Correct number: 4485 9821 1491 2228
                         if (validator.isNumberValid()) {
                                 user.clearAttempts();
                                 message = "Card has been accepted!";
                                 break;
                         }
-                        // suspicious behaviour
+                        // Suspicious behaviour
                         user.increaseAttempts();
-                        System.out.print("Another attempt?: ");
-                        attempt = scanner.nextLine();
-                } while (!attempt.equals("not"));
+                        counter++;
+                } while (counter<=5);
 
                 System.out.println(message);
                 // Do smth. here with further validation
         }
+
 }

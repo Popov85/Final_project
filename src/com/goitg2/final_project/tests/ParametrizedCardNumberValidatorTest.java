@@ -49,6 +49,7 @@ public class ParametrizedCardNumberValidatorTest {
                                 {"5632 9658 8547 9696 63o", false},   // Letter o instead of zero at the last position
                                 {"4111111111111111", true},            // Valid Visa card
                                 {"XXXX-XXXX-XXXX-XXXX", false},       // Pattern was entered
+                                {"1212-1212-1211-4544", false}        // Dash is not allowed
                 });
         }
 

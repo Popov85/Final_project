@@ -44,7 +44,7 @@ public final class PreAuthentication {
                         }
                         // suspicious behaviour
                         user.increaseAttempts();
-                        System.out.print("Another attempt?: ");
+                        System.out.print("Another attempt? (yes/not) ");
                         attempt= scanner.nextLine();
                 } while (!attempt.equals("not"));
                 if (repo.hasBlockedUser(user)) {

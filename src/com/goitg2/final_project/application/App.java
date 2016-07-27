@@ -17,17 +17,24 @@ public class App {
                 Scanner scanner = new Scanner(System.in);
                 String attempt;
                 do {
-                        anotherUser(scanner);
+                        try {
+                                anotherUser(scanner);
+                        } catch (InputMismatchException e) {
+                                System.out.println(e.getMessage());
+                        }
                         displayBlocked();
-                        System.out.print("More users?\n");
+                        System.out.print("More users? (yes/not)\n");
                         attempt= scanner.nextLine();
                 } while (!attempt.equals("not"));
 
         }
 
-        private static void anotherUser(Scanner scanner) {
+        private static void anotherUser(Scanner scanner) throws InputMismatchException {
                 System.out.println("Enter email: ");
                 String email= scanner.nextLine();
+                if (!checkEmail(email)) {
+                        throw new InputMismatchException("Wrong email!");
+                }
                 User user = null;
                 try {
                         user = new User(email);
@@ -42,6 +49,10 @@ public class App {
                         System.out.println("Invalid card number...");
                         return;
                 }
+        }
+
+        private static boolean checkEmail(String email) {
+                return email.indexOf('@')==-1 ? false:true;
         }
 
         private static void displayBlocked() {

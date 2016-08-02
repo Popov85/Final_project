@@ -14,9 +14,11 @@ public final class PreAuthentication extends Thread {
 
         private final User user;
         private final BlockedUsersRepository repo;
+        private final String card;
 
-        public PreAuthentication(User user) {
+        public PreAuthentication(User user, String card) {
                 this.user = user;
+                this.card = card;
                 this.repo = BlockedUsersRepository.getInstance();
         }
 
@@ -30,33 +32,29 @@ public final class PreAuthentication extends Thread {
          * after a number of unsuccessful attempts
          * @throws InputMismatchException when empty string is entered
          */
-        private void preAuthenticate() throws InputMismatchException {
-                String message=null;
+        public String preAuthenticate() throws InputMismatchException {
+                String message = "";
                 Validator validator;
-                int counter = 0;
-                do {
-                        if (repo.hasForeverBlockedUser(user)) {
-                                message = user.getEmail()+" got constantly blocked!\nAddress the system admin to get unblocked!";
-                                break;
-                        }
-                        if (repo.hasTempBlockedUser(user)) {
-                                message = user.getEmail()+" got temporarily blocked! Too many attempts! ";
-                                break;
-                        }
-                        // !!! Keep intentionally entering invalid card number !!!Just in order to model the behaviour
-                        validator = new CardNumberValidatorCustom("4845 2565 2325 2365"); // Correct number: 4485 9821 1491 2228
-                        if (validator.isNumberValid()) {
-                                user.clearAttempts();
-                                message = "Card has been accepted!";
-                                break;
-                        }
+                if (repo.hasForeverBlockedUser(user)) {
+                        message = "You are constantly blocked!\nAddress the system admin to get unblocked!";
+                        return message;
+                }
+                if (repo.hasTempBlockedUser(user)) {
+                        message = "TEMP: You are temporarily blocked! Too many attempts!";
+                        return message;
+                }
+                validator = new CardNumberValidatorCustom(card);
+                if (validator.isNumberValid()) {
+                        user.clearAttempts();
+                        message = "SUCCESS: Your card has been accepted!";
+                } else {
                         // Suspicious behaviour
                         user.increaseAttempts();
-                        counter++;
-                } while (counter<=5);
-
+                        message = "DECLINE: You have "+(User.QUANTITY_OF_ATTEMPTS-user.getFailedAttempts())+ " attempts left";
+                }
                 System.out.println(message);
+                return message;
+                // TODO
                 // Do smth. here with further validation
         }
-
 }

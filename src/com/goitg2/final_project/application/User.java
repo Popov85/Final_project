@@ -14,13 +14,13 @@ public class User extends TimerTask {
         /** Specifies for how long a user is blocked */
         private static final long BLOCKING_TIME = 6000; // 6 sec
         /** Specifies how many times a user must enter wrong card number before being blocked */
-        private static final long QUANTITY_OF_ATTEMPTS = 3;
+        public static final long QUANTITY_OF_ATTEMPTS = 3;
 
         private final BlockedUsersRepository repo;
 
         /** Unique user ID */
         private final String email;
-        /**Specifies how many attempts in one sequence was made to enter a correct card number*/
+        /**Specifies how many attempts in one sequence was made as yet*/
         private int failedAttempts = 0;
         private boolean isBlocked;
         /** Points out at the fact the user has already been banned during the app's runtime */
@@ -28,7 +28,6 @@ public class User extends TimerTask {
         private Timer timer;
 
         public User(String email) throws InputMismatchException {
-                if (email.isEmpty()||email == null) throw new InputMismatchException("Invalid email!");
                 this.email = email;
                 this.repo = BlockedUsersRepository.getInstance();
         }
@@ -50,10 +49,8 @@ public class User extends TimerTask {
          * After a number of such failed attempts the user becomes blocked
          */
         public void increaseAttempts() {
-                if (this.failedAttempts < QUANTITY_OF_ATTEMPTS-1) {
-                        this.failedAttempts++;
-                }
-                else {
+                this.failedAttempts++;
+                if (this.failedAttempts >= QUANTITY_OF_ATTEMPTS) {
                         blockUser();
                 }
         }

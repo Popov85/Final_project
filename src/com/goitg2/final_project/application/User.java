@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class User extends TimerTask {
 
         /** Specifies for how long a user is blocked */
-        private static final long BLOCKING_TIME = 6000; // 6 sec
+        public static final long BLOCKING_TIME = 10000; // 6 sec
         /** Specifies how many times a user must enter wrong card number before being blocked */
         public static final long QUANTITY_OF_ATTEMPTS = 3;
 
@@ -48,18 +48,20 @@ public class User extends TimerTask {
          * Increases the counter of unsuccessful attempts for this user
          * After a number of such failed attempts the user becomes blocked
          */
-        public void increaseAttempts() {
+        public int increaseAttempts() {
+                if (this.wasBlocked) {
+                        foreverBlockUser();
+                        return 3;
+                }
                 this.failedAttempts++;
                 if (this.failedAttempts >= QUANTITY_OF_ATTEMPTS) {
-                        blockUser();
+                        tempBlockUser();
+                        return 2;
                 }
+                return 1;
         }
 
-        private void blockUser() {
-                if (wasBlocked) {
-                        foreverBlockUser();
-                        return;
-                }
+        private void tempBlockUser() {
                 this.isBlocked = true;
                 this.wasBlocked = true; // Says that this user was already banned during the app's runtime at least once
                 repo.addTempBlockedUser(this);

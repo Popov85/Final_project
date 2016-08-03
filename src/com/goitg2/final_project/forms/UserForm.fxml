@@ -15,9 +15,9 @@
     <AnchorPane fx:id="form" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <Label layoutX="14.0" layoutY="23.0" text="Enter e-mail:" />
-            <TextField fx:id="emailTextField" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="269.0" />
+            <TextField fx:id="emailTextField" layoutX="14.0" layoutY="40.0" onKeyTyped="#cleanCardNumber" prefHeight="25.0" prefWidth="269.0" promptText="user@gmail.com" />
             <Label layoutX="14.0" layoutY="80.0" text="Enter your card number:" />
-            <TextField fx:id="cardTextField" layoutX="14.0" layoutY="97.0" prefHeight="25.0" prefWidth="269.0" />
+            <TextField fx:id="cardTextField" layoutX="14.0" layoutY="97.0" onMouseClicked="#cleanMainMessage" prefHeight="25.0" prefWidth="269.0" />
             <Button fx:id="validateButton" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" onAction="#getData" text="Check" />
             <Button fx:id="cleanupButton" layoutX="90.0" layoutY="149.0" mnemonicParsing="false" onAction="#cleanForm" prefHeight="25.0" prefWidth="49.0" text="Clear" />
             <Label fx:id="mainMessageLabel" layoutX="14.0" layoutY="198.0" />
@@ -28,11 +28,11 @@
          <children>
             <Label fx:id="warningLabel" layoutX="14.0" layoutY="14.0" text="TEMP" visible="false" />
             <Label fx:id="warningExplainLabel" layoutX="14.0" layoutY="31.0" text="(then you will be blocked for 60 sec)" visible="false" />
-            <Label fx:id="tempLabel" layoutX="14.0" layoutY="68.0" text="You are temporarlity blocked." visible="false" />
+            <Label fx:id="tempLabel" layoutX="14.0" layoutY="68.0" text="You are temporarily blocked." visible="false" />
             <Label layoutX="16.0" layoutY="97.0" text="You will be unblocked in:" visible="false" />
             <Label fx:id="timingLabel" layoutX="149.0" layoutY="97.0" prefHeight="17.0" prefWidth="12.0" text="_" visible="false" />
             <Label layoutX="164.0" layoutY="97.0" text="sec." visible="false" />
-            <ProgressBar fx:id="progressUnblock" layoutX="14.0" layoutY="130.0" prefHeight="18.0" prefWidth="269.0" progress="0.0" visible="false" />
+            <ProgressBar fx:id="progressUnblock" layoutX="14.0" layoutY="130.0" prefHeight="18.0" prefWidth="269.0" progress="0.76" visible="false" />
          </children></AnchorPane>
   </items>
 </SplitPane>

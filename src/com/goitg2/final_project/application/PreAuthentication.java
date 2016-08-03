@@ -35,26 +35,31 @@ public final class PreAuthentication extends Thread {
         public String preAuthenticate() throws InputMismatchException {
                 String message = "";
                 Validator validator;
-                if (repo.hasForeverBlockedUser(user)) {
-                        message = "You are constantly blocked!\nAddress the system admin to get unblocked!";
+                /*if (repo.hasForeverBlockedUser(user)) {
+                        message = "CONST: You are constantly blocked!";
                         return message;
                 }
                 if (repo.hasTempBlockedUser(user)) {
                         message = "TEMP: You are temporarily blocked! Too many attempts!";
                         return message;
-                }
+                }*/
                 validator = new CardNumberValidatorCustom(card);
                 if (validator.isNumberValid()) {
                         user.clearAttempts();
                         message = "SUCCESS: Your card has been accepted!";
                 } else {
                         // Suspicious behaviour
-                        user.increaseAttempts();
-                        message = "DECLINE: You have "+(User.QUANTITY_OF_ATTEMPTS-user.getFailedAttempts())+ " attempts left";
+                        int digit = user.increaseAttempts();
+                        if (digit==3) {
+                                message = "CONST: You are constantly blocked!";
+                        } else if (digit==2) {
+                                message = "TEMP: You are temporarily blocked! Too many attempts!";
+                        } else {
+                                message = "DECLINE: You have "+(User.QUANTITY_OF_ATTEMPTS-user.getFailedAttempts())+ " attempts left";
+                        }
+
                 }
                 System.out.println(message);
                 return message;
-                // TODO
-                // Do smth. here with further validation
         }
 }
